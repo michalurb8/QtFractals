@@ -4,8 +4,8 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    FractalApp w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+    FractalApp fractalWindow;
+    fractalWindow.show();
+    return app.exec();
 }
