@@ -9,11 +9,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    fractal.cpp \
     main.cpp \
-    fractalapp.cpp
+    fractalapp.cpp \
+    squarebutton.cpp
 
 HEADERS += \
-    fractalapp.h
+    fractal.h \
+    fractalapp.h \
+    squarebutton.h
 
 FORMS += \
     fractalapp.ui

@@ -1,4 +1,5 @@
 #include "fractalapp.h"
+#include "fractal.h"
 
 #include <QApplication>
 
