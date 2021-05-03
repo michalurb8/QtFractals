@@ -11,13 +11,11 @@ CONFIG += c++11
 SOURCES += \
     fractal.cpp \
     main.cpp \
-    fractalapp.cpp \
-    squarebutton.cpp
+    fractalapp.cpp
 
 HEADERS += \
     fractal.h \
-    fractalapp.h \
-    squarebutton.h
+    fractalapp.h
 
 FORMS += \
     fractalapp.ui

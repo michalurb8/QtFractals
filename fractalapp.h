@@ -14,8 +14,10 @@ class FractalApp : public QMainWindow
 public:
     FractalApp(QWidget *parent = nullptr);
     ~FractalApp();
-
 private:
     Ui::FractalApp *ui;
+
+private slots:
+    void on_sliderPoints_valueChanged(int value);
 };
 #endif // FRACTALAPP_H

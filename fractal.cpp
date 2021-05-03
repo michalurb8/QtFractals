@@ -2,12 +2,15 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <ctime>
 
 Fractal::Fractal(int pointNum, int stepSize, int offset)
     :pointNum(pointNum), stepSize(stepSize), offset(offset), currentAttractor(0)
 {
+    srand(time(NULL));
     setCurrentPoint(0,0);
     attractorPoints = new Vec2[1];
+    currentAttractor = 0;
 }
 
 Fractal::~Fractal()
@@ -15,27 +18,23 @@ Fractal::~Fractal()
     delete[] attractorPoints;
 }
 
-void Fractal::generateNextPoint()
+void Fractal::generateNextPoint(float weight)
 {
     int chosenIndex = (currentAttractor + offset + stepSize*rand()%pointNum)%pointNum;
     Vec2 chosenPoint = attractorPoints[chosenIndex];
-    this->currentPoint.Move(chosenPoint - currentPoint, 0.2);
+    this->currentPoint.Move(chosenPoint - currentPoint, weight);
 }
 
 void Fractal::UpdateParams(int pointNum, int stepSize, int offset)
 {
-    currentAttractor = 0;
     this->stepSize = stepSize;
     this->offset = offset;
-    if(this->pointNum == pointNum)
-    {
-        this->pointNum = pointNum;
-        setupAttractors();
-    }
-    else this->pointNum = pointNum;
+    this->pointNum = pointNum;
+    currentAttractor = 0;
+    setupAttractors();
 }
 
-void Fractal::setCurrentPoint(int x, int y)
+void Fractal::setCurrentPoint(float x, float y)
 {
     this->currentPoint.x = x;
     this->currentPoint.y = y;
@@ -55,26 +54,29 @@ void Fractal::setupAttractors()
     }
 }
 
-int Fractal::getX()
+float Fractal::getX()
 {
     return this->currentPoint.x;
 }
 
-int Fractal::getY()
+float Fractal::getY()
 {
     return this->currentPoint.y;
 }
 
-Vec2::Vec2(int x, int y)
+
+
+
+Vec2::Vec2(float x, float y)
 {
     this->x = x;
     this->y = y;
 }
 
-void Vec2::Move(const Vec2 &arg, double percent)
+void Vec2::Move(const Vec2 &arg, double weight)
 {
-    this->x += arg.x*percent;
-    this->y += arg.y*percent;
+    this->x += arg.x*weight;
+    this->y += arg.y*weight;
 }
 
 Vec2 Vec2::operator-(const Vec2 &arg)
