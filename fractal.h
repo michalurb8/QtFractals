@@ -22,9 +22,7 @@ class Fractal
     int currentAttractor;
     void setCurrentPoint(float x, float y);
     void generateFirstPoint();
-    void setupAttractors(float radius = 1);
-    generationRule gRule;
-    colorRule cRule;
+    void setupAttractors(float radius = 1, generationRule gRule = CIRCLE);
 public:
     Fractal(int pointNum = 3, int stepSize = 1, int offset = 0);
     ~Fractal();

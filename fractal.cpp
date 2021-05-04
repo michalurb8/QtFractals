@@ -11,8 +11,6 @@ Fractal::Fractal(int pointNum, int stepSize, int offset)
     , stepSize(stepSize)
     , offset(offset)
     , currentAttractor(0)
-    , gRule(CIRCLE)
-    , cRule(MONO)
 {
     srand(time(NULL));
     setCurrentPoint(0,0);
@@ -53,12 +51,13 @@ void Fractal::setCurrentPoint(float x, float y)
     currentPoint.y = y;
 }
 
-void Fractal::setupAttractors(float radius)
+void Fractal::setupAttractors(float radius, generationRule gRule)
 {
     if(attractorPoints) delete[] attractorPoints;
     attractorPoints = new Vec2[pointNum];
     switch(gRule)
     {
+    default:
     case CIRCLE:
         for(int i = 0; i < pointNum; ++i)
         {
@@ -71,8 +70,8 @@ void Fractal::setupAttractors(float radius)
         for(int i = 0; i < pointNum; ++i)
         {
             int newX = radius*cos(2.0*PI*i/pointNum);
-            int newY = radius*sin(2.0*PI*i/pointNum);
             newX *= 1.2;
+            int newY = radius*sin(2.0*PI*i/pointNum);
             newY *= 1.2;
             attractorPoints[i] = Vec2(newX, newY);
         }
@@ -80,12 +79,11 @@ void Fractal::setupAttractors(float radius)
     case RANDOM:
         for(int i = 0; i < pointNum; ++i)
         {
-        int newX = rand()%(2*int(radius)) - radius;
-        int newY = rand()%(2*int(radius)) - radius;
-        attractorPoints[i] = Vec2(newX, newY);
+            int newX = rand()%(2*int(radius)) - radius;
+            int newY = rand()%(2*int(radius)) - radius;
+            attractorPoints[i] = Vec2(newX, newY);
         }
-    default:
-        throw new _exception();
+        break;
     }
 }
 
