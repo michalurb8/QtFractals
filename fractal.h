@@ -1,6 +1,9 @@
 #ifndef FRACTAL_H
 #define FRACTAL_H
 
+enum generationRule {CIRCLE, NOISE, RANDOM};
+enum colorRule {MONO, PARENT, TYPE};
+
 struct Vec2
 {
     Vec2(float x=0, float y=0);
@@ -20,11 +23,14 @@ class Fractal
     void setCurrentPoint(float x, float y);
     void generateFirstPoint();
     void setupAttractors(float radius = 1);
+    generationRule gRule;
+    colorRule cRule;
 public:
     Fractal(int pointNum = 3, int stepSize = 1, int offset = 0);
     ~Fractal();
     void generateNextPoint(float weight=0.5);
-    void UpdateParams(int pointNum, int stepSize, int offset);
+    void updateParams(int pointNum, int stepSize, int offset);
+    int getCurrentAttractor();
     float getX();
     float getY();
 

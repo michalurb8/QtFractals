@@ -7,7 +7,12 @@
 #define PI 3.141
 
 Fractal::Fractal(int pointNum, int stepSize, int offset)
-    :pointNum(pointNum), stepSize(stepSize), offset(offset), currentAttractor(0)
+    :pointNum(pointNum)
+    , stepSize(stepSize)
+    , offset(offset)
+    , currentAttractor(0)
+    , gRule(CIRCLE)
+    , cRule(MONO)
 {
     srand(time(NULL));
     setCurrentPoint(0,0);
@@ -28,13 +33,18 @@ void Fractal::generateNextPoint(float weight)
     currentPoint.Move(chosenPoint - currentPoint, weight);
 }
 
-void Fractal::UpdateParams(int pointNum, int stepSize, int offset)
+void Fractal::updateParams(int pointNum, int stepSize, int offset)
 {
     this->stepSize = stepSize;
     this->offset = offset;
     this->pointNum = pointNum;
     currentAttractor = 0;
     setupAttractors();
+}
+
+int Fractal::getCurrentAttractor()
+{
+    return currentAttractor;
 }
 
 void Fractal::setCurrentPoint(float x, float y)
@@ -47,12 +57,35 @@ void Fractal::setupAttractors(float radius)
 {
     if(attractorPoints) delete[] attractorPoints;
     attractorPoints = new Vec2[pointNum];
-    //TODO switch()
-    for(int i = 0; i < pointNum; ++i)
+    switch(gRule)
     {
-        int newX = radius*cos(2.0*PI*i/pointNum);
-        int newY = radius*sin(2.0*PI*i/pointNum);
+    case CIRCLE:
+        for(int i = 0; i < pointNum; ++i)
+        {
+            int newX = radius*cos(2.0*PI*i/pointNum);
+            int newY = radius*sin(2.0*PI*i/pointNum);
+            attractorPoints[i] = Vec2(newX, newY);
+        }
+        break;
+    case NOISE:
+        for(int i = 0; i < pointNum; ++i)
+        {
+            int newX = radius*cos(2.0*PI*i/pointNum);
+            int newY = radius*sin(2.0*PI*i/pointNum);
+            newX *= 1.2;
+            newY *= 1.2;
+            attractorPoints[i] = Vec2(newX, newY);
+        }
+        break;
+    case RANDOM:
+        for(int i = 0; i < pointNum; ++i)
+        {
+        int newX = rand()%(2*int(radius)) - radius;
+        int newY = rand()%(2*int(radius)) - radius;
         attractorPoints[i] = Vec2(newX, newY);
+        }
+    default:
+        throw new _exception();
     }
 }
 
