@@ -16,8 +16,12 @@ public:
     ~FractalApp();
 private:
     Ui::FractalApp *ui;
+    QColor backColor, fractalColor;
+    void UpdateColors();
 
 private slots:
     void on_sliderPoints_valueChanged(int value);
+    void on_buttonBackColor_clicked();
+    void on_buttonFractalColor_clicked();
 };
 #endif // FRACTALAPP_H
