@@ -3,12 +3,15 @@
 
 #include <QWidget>
 #include <QPixmap>
+#include <QImage>
+#include <QColor>
+#include <QPainter>
 
 class PixmapWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit PixmapWidget(QWidget *parent = nullptr);
+    PixmapWidget(QWidget *parent = nullptr);
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
 
@@ -17,7 +20,8 @@ protected:
 
 private:
     QPixmap pixmap;
-
+    QImage image;
+    QColor backColor;
 };
 
 #endif // PIXMAPWIDGET_H
