@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     fractal.cpp \
     main.cpp \
-    fractalapp.cpp
+    fractalapp.cpp \
+    pixmapwidget.cpp
 
 HEADERS += \
     fractal.h \
-    fractalapp.h
+    fractalapp.h \
+    pixmapwidget.h
 
 FORMS += \
     fractalapp.ui
