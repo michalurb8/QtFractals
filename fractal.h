@@ -19,9 +19,9 @@ class Fractal
     int currentAttractor;
     void setCurrentPoint(float x, float y);
     void generateFirstPoint();
-    void setupAttractors();
+    void setupAttractors(float radius = 1);
 public:
-    Fractal(int pointNum = 3, int stepSize = 0, int offset = 0);
+    Fractal(int pointNum = 3, int stepSize = 1, int offset = 0);
     ~Fractal();
     void generateNextPoint(float weight=0.5);
     void UpdateParams(int pointNum, int stepSize, int offset);

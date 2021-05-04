@@ -4,25 +4,28 @@
 #include <cstdlib>
 #include <ctime>
 
+#define PI 3.141
+
 Fractal::Fractal(int pointNum, int stepSize, int offset)
     :pointNum(pointNum), stepSize(stepSize), offset(offset), currentAttractor(0)
 {
     srand(time(NULL));
     setCurrentPoint(0,0);
-    attractorPoints = new Vec2[1];
+    attractorPoints = nullptr;
+    setupAttractors();
     currentAttractor = 0;
 }
 
 Fractal::~Fractal()
 {
-    delete[] attractorPoints;
+    if(attractorPoints) delete[] attractorPoints;
 }
 
 void Fractal::generateNextPoint(float weight)
 {
     int chosenIndex = (currentAttractor + offset + stepSize*rand()%pointNum)%pointNum;
     Vec2 chosenPoint = attractorPoints[chosenIndex];
-    this->currentPoint.Move(chosenPoint - currentPoint, weight);
+    currentPoint.Move(chosenPoint - currentPoint, weight);
 }
 
 void Fractal::UpdateParams(int pointNum, int stepSize, int offset)
@@ -36,32 +39,31 @@ void Fractal::UpdateParams(int pointNum, int stepSize, int offset)
 
 void Fractal::setCurrentPoint(float x, float y)
 {
-    this->currentPoint.x = x;
-    this->currentPoint.y = y;
+    currentPoint.x = x;
+    currentPoint.y = y;
 }
 
-void Fractal::setupAttractors()
+void Fractal::setupAttractors(float radius)
 {
-    delete[] attractorPoints;
+    if(attractorPoints) delete[] attractorPoints;
     attractorPoints = new Vec2[pointNum];
     //TODO switch()
-    int radius = 50;
     for(int i = 0; i < pointNum; ++i)
     {
-        int newX = radius*cos(i/pointNum);
-        int newY = radius*sin(i/pointNum);
+        int newX = radius*cos(2.0*PI*i/pointNum);
+        int newY = radius*sin(2.0*PI*i/pointNum);
         attractorPoints[i] = Vec2(newX, newY);
     }
 }
 
 float Fractal::getX()
 {
-    return this->currentPoint.x;
+    return currentPoint.x;
 }
 
 float Fractal::getY()
 {
-    return this->currentPoint.y;
+    return currentPoint.y;
 }
 
 
@@ -75,11 +77,11 @@ Vec2::Vec2(float x, float y)
 
 void Vec2::Move(const Vec2 &arg, double weight)
 {
-    this->x += arg.x*weight;
-    this->y += arg.y*weight;
+    x += arg.x*weight;
+    y += arg.y*weight;
 }
 
 Vec2 Vec2::operator-(const Vec2 &arg)
 {
-    return Vec2(this->x - arg.x, this->y - arg.y);
+    return Vec2(x - arg.x, y - arg.y);
 }
