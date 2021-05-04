@@ -9,7 +9,7 @@ FractalApp::FractalApp(QWidget *parent)
     , fractalColor("red")
 {
     ui->setupUi(this);
-    UpdateColors();
+    updateColors();
 }
 
 FractalApp::~FractalApp()
@@ -17,7 +17,7 @@ FractalApp::~FractalApp()
     delete ui;
 }
 
-void FractalApp::UpdateColors()
+void FractalApp::updateColors()
 {
     QString style = "background-color: " + backColor.name();
     ui->buttonBackColor->setStyleSheet(style);
@@ -37,11 +37,11 @@ void FractalApp::on_sliderPoints_valueChanged(int value)
 void FractalApp::on_buttonBackColor_clicked()
 {
     backColor = QColorDialog().getColor();
-    UpdateColors();
+    updateColors();
 }
 
 void FractalApp::on_buttonFractalColor_clicked()
 {
     fractalColor = QColorDialog().getColor();
-    UpdateColors();
+    updateColors();
 }
