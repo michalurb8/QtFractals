@@ -31,25 +31,18 @@
         <property name="checkable">
          <bool>false</bool>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0" colspan="2">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
           <widget class="QPushButton" name="buttonCircle">
            <property name="text">
             <string>Circle</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item>
           <widget class="QPushButton" name="buttonRandom">
            <property name="text">
             <string>Random</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="buttonRCircle">
-           <property name="text">
-            <string>Random circle</string>
            </property>
           </widget>
          </item>
@@ -74,7 +67,7 @@
             <number>3</number>
            </property>
            <property name="maximum">
-            <number>999</number>
+            <number>50</number>
            </property>
            <property name="pageStep">
             <number>5</number>
@@ -120,6 +113,9 @@
            <property name="pageStep">
             <number>5</number>
            </property>
+           <property name="value">
+            <number>1</number>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -133,6 +129,9 @@
            <property name="text">
             <string>Offset:</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
@@ -140,12 +139,18 @@
            <property name="text">
             <string>Points:</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="labelStep">
            <property name="text">
             <string>Step:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -161,7 +166,7 @@
             <number>3</number>
            </property>
            <property name="maximum">
-            <number>999</number>
+            <number>50</number>
            </property>
           </widget>
          </item>
@@ -175,6 +180,9 @@
            </property>
            <property name="maximum">
             <number>2</number>
+           </property>
+           <property name="value">
+            <number>1</number>
            </property>
           </widget>
          </item>
@@ -246,18 +254,8 @@
             </widget>
            </item>
            <item row="1" column="0" colspan="2">
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QRadioButton" name="radioMono">
-               <property name="text">
-                <string>Mono</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="1">
               <widget class="QRadioButton" name="radioParent">
                <property name="text">
                 <string>Parent</string>
@@ -267,10 +265,27 @@
                </property>
               </widget>
              </item>
-             <item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioMono">
+               <property name="text">
+                <string>Mono</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
               <widget class="QRadioButton" name="radioAge">
                <property name="text">
                 <string>Age</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QRadioButton" name="radioAlpha">
+               <property name="text">
+                <string>Alpha</string>
                </property>
               </widget>
              </item>
@@ -295,110 +310,106 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="buttonSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QGroupBox" name="groupDraw">
         <property name="title">
          <string>Draw settings</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <layout class="QHBoxLayout" name="HLayoutClear">
-           <item>
-            <widget class="QPushButton" name="buttonClear">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Clear</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkAuto">
-             <property name="toolTip">
-              <string>If checked, any change causes refresh</string>
-             </property>
-             <property name="text">
-              <string>Auto-refresh</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-             <property name="tristate">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelIterations">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Iterations:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="HLayoutIterations">
-           <item>
-            <widget class="QLabel" name="labelIterations">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="autoFillBackground">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Iterations:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="spinIterations">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="suffix">
-              <string>00</string>
-             </property>
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-             <property name="value">
-              <number>1</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="buttonMore">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="text">
-              <string>Draw more</string>
-             </property>
-             <property name="flat">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="spinIterations">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="suffix">
+            <string>e4</string>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>1000</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QPushButton" name="buttonClear">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QPushButton" name="buttonMore">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Draw more</string>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -406,7 +417,7 @@
      </layout>
     </item>
     <item>
-     <widget class="PixmapWidget" name="widget" native="true">
+     <widget class="PixmapWidget" name="pixmapwidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>100</horstretch>
@@ -424,6 +435,11 @@
    <extends>QWidget</extends>
    <header>pixmapwidget.h</header>
    <container>1</container>
+   <slots>
+    <signal>resized()</signal>
+    <slot>clear()</slot>
+    <slot>save()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -435,12 +451,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>120</x>
-     <y>157</y>
+     <x>146</x>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
-     <x>384</x>
-     <y>167</y>
+     <x>192</x>
+     <y>154</y>
     </hint>
    </hints>
   </connection>
@@ -451,12 +467,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>190</x>
-     <y>194</y>
+     <x>146</x>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel">
-     <x>395</x>
-     <y>187</y>
+     <x>192</x>
+     <y>183</y>
     </hint>
    </hints>
   </connection>
@@ -467,12 +483,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>246</x>
-     <y>216</y>
+     <x>146</x>
+     <y>208</y>
     </hint>
     <hint type="destinationlabel">
-     <x>397</x>
-     <y>222</y>
+     <x>192</x>
+     <y>212</y>
     </hint>
    </hints>
   </connection>
@@ -483,12 +499,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>390</x>
-     <y>158</y>
+     <x>192</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
-     <x>232</x>
-     <y>163</y>
+     <x>146</x>
+     <y>150</y>
     </hint>
    </hints>
   </connection>
@@ -499,12 +515,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>398</x>
-     <y>185</y>
+     <x>192</x>
+     <y>183</y>
     </hint>
     <hint type="destinationlabel">
-     <x>247</x>
-     <y>192</y>
+     <x>146</x>
+     <y>179</y>
     </hint>
    </hints>
   </connection>
@@ -515,14 +531,130 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>386</x>
-     <y>213</y>
+     <x>192</x>
+     <y>212</y>
     </hint>
     <hint type="destinationlabel">
-     <x>245</x>
-     <y>219</y>
+     <x>146</x>
+     <y>208</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonClear</sender>
+   <signal>clicked()</signal>
+   <receiver>pixmapwidget</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>586</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>480</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonMore</sender>
+   <signal>clicked()</signal>
+   <receiver>FractalApp</receiver>
+   <slot>drawMore()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>613</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderPoints</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>FractalApp</receiver>
+   <slot>updateFractal()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderStep</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>FractalApp</receiver>
+   <slot>updateFractal()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>133</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliderOffset</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>FractalApp</receiver>
+   <slot>updateFractal()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>108</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pixmapwidget</sender>
+   <signal>resized()</signal>
+   <receiver>FractalApp</receiver>
+   <slot>updateFractal()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>484</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonSave</sender>
+   <signal>clicked()</signal>
+   <receiver>pixmapwidget</receiver>
+   <slot>save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>138</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>515</x>
+     <y>363</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>drawMore()</slot>
+  <slot>updateFractal()</slot>
+ </slots>
 </ui>

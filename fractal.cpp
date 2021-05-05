@@ -3,20 +3,19 @@
 #include <ctime>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
-#define PI 3.141
+#define PI 3.1412
 
 Fractal::Fractal(int pointNum, int stepSize, int offset)
     :pointNum(pointNum)
     , stepSize(stepSize)
     , offset(offset)
+    , attractorPoints(nullptr)
     , currentAttractor(0)
 {
     srand(time(NULL));
-    setCurrentPoint(0,0);
-    attractorPoints = nullptr;
     setupAttractors();
-    currentAttractor = 0;
 }
 
 Fractal::~Fractal()
@@ -26,8 +25,9 @@ Fractal::~Fractal()
 
 void Fractal::generateNextPoint(float weight)
 {
-    int chosenIndex = (currentAttractor + offset + stepSize*rand()%pointNum)%pointNum;
-    Vec2 chosenPoint = attractorPoints[chosenIndex];
+    ++age;
+    currentAttractor = (currentAttractor + offset + stepSize*rand()%pointNum)%pointNum;
+    Vec2 chosenPoint = attractorPoints[currentAttractor];
     currentPoint.Move(chosenPoint - currentPoint, weight);
 }
 
@@ -40,9 +40,9 @@ void Fractal::updateParams(int pointNum, int stepSize, int offset)
     setupAttractors();
 }
 
-int Fractal::getCurrentAttractor()
+float Fractal::getParent()
 {
-    return currentAttractor;
+    return (float(currentAttractor))/(pointNum-1.0);
 }
 
 void Fractal::setCurrentPoint(float x, float y)
@@ -66,16 +66,6 @@ void Fractal::setupAttractors(float radius, generationRule gRule)
             attractorPoints[i] = Vec2(newX, newY);
         }
         break;
-    case NOISE:
-        for(int i = 0; i < pointNum; ++i)
-        {
-            int newX = radius*cos(2.0*PI*i/pointNum);
-            newX *= 1.2;
-            int newY = radius*sin(2.0*PI*i/pointNum);
-            newY *= 1.2;
-            attractorPoints[i] = Vec2(newX, newY);
-        }
-        break;
     case RANDOM:
         for(int i = 0; i < pointNum; ++i)
         {
@@ -85,6 +75,18 @@ void Fractal::setupAttractors(float radius, generationRule gRule)
         }
         break;
     }
+    setCurrentPoint(0,0);
+    generateNextPoint();
+    generateNextPoint();
+    generateNextPoint();
+    generateNextPoint();
+    generateNextPoint();
+    age = 0;
+}
+
+int Fractal::getAge()
+{
+    return age;
 }
 
 float Fractal::getX()
