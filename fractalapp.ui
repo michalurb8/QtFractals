@@ -400,11 +400,18 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="toolTip">
             <string/>
            </property>
            <property name="text">
-            <string>Draw more</string>
+            <string>Draw</string>
            </property>
            <property name="flat">
             <bool>false</bool>

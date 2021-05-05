@@ -99,13 +99,6 @@ void FractalApp::on_buttonRandom_clicked()
     update();
 }
 
-void FractalApp::on_buttonRCircle_clicked()
-{
-    float minDim = qMin(ui->pixmapwidget->width(), ui->pixmapwidget->height());
-    fract.setupAttractors(minDim/2, NOISE);
-    update();
-}
-
 void FractalApp::on_radioMono_clicked()
 {
     cRule = MONO;
