@@ -29,9 +29,9 @@ void FractalApp::updateColors()
 
 void FractalApp::on_sliderPoints_valueChanged(int value)
 {
-    ui->sliderStep->setRange(0,value-1);
+    ui->sliderStep->setRange(1,value-1);
     ui->sliderOffset->setRange(0,value-1);
-    ui->spinStep->setRange(0,value-1);
+    ui->spinStep->setRange(1,value-1);
     ui->spinOffset->setRange(0,value-1);
 }
 
@@ -77,7 +77,6 @@ void FractalApp::drawMore()
             newColor.setHsv(hue,255,255);
             break;
         case PARENT:
-//            hue = fract.getParent();
             newColor.setHsv(hue*255,255,255);
             break;
         }
